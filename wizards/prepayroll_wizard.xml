@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="user_wizard_view_form" model="ir.ui.view">
+        <field name="name">user_wizard_view_form</field>
+        <field name="model">pre.payroll.user.wizard</field>
+        <field name="arch" type="xml">
+            <form string="user_wizard_form">
+                <header>
+                    <button string="Generar Reporte" name="create_report" type="object" class="btn-primary"/>
+                </header>
+                <group>
+                    <field name="employee_vat"/>
+                    <field name="report_type" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Cerrar" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="manager_wizard_view_form" model="ir.ui.view">
+        <field name="name">manager_wizard_view_form</field>
+        <field name="model">pre.payroll.manager.wizard</field>
+        <field name="arch" type="xml">
+            <form string="manager_wizard_form">
+                <header>
+                    <button string="Generar Reporte" name="create_report" type="object" class="btn-primary"/>
+                </header>
+                <group>
+                    <field name="report_type"/>
+                    <field name="employee_ids" widget="many2many_tags" attrs="{'invisible': [('all_departments', '=', True)]}"/>
+                    <field name="department_id" widget="many2many_tags" attrs="{'invisible': [('all_departments', '=', True)]}"/>
+                    <field name="all_departments" attrs="{'invisible': [('department_id', '=', False)]}"/>
+                </group>
+                <separator colspan="2" string="Archivo XLS"/>
+                <group>
+                    <field name="payslip_report_xlsx_binary" filename="payslip_report_xlsx_file_name" readonly="1"/>
+                </group>
+                <footer>
+                    <button string="Cerrar" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="pre_payroll_view_tree" model="ir.ui.view">
+        <field name="name">prepayroll_view_tree</field>
+        <field name="model">pre.payroll</field>
+        <field name="arch" type="xml">
+            <tree string="Pre Nómina" create="false">
+                <field name="employee_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pre_payroll_action" model="ir.actions.act_window">
+        <field name="name">Reporte Prenominal Para el Empleado</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pre.payroll</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Haz click en el botón "Reporte Pre Nóminal" para generar tu nómina hasta la fecha.
+            </p>
+        </field>
+        <field name="view_id" ref="pre_payroll_view_tree"/>
+    </record>
+
+    <record id="manager_prepayroll_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reporte de Masivo Pre-Nómina</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pre.payroll.manager.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="manager_wizard_view_form"/>
+    </record>
+
+    <record id="user_prepayroll_wizard_action" model="ir.actions.act_window">
+        <field name="name">Reporte de Pre-Nómina</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pre.payroll.user.wizard</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="user_wizard_view_form"/>
+    </record>
+
+    <!--    This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="prepayroll_menu" name="Reporte Pre-Nomina" sequence="20"
+              web_icon="dominican_prepayroll,static/description/icon.png"
+              action="pre_payroll_action"
+              groups="dominican_prepayroll.user_prepayroll_group"
+    />
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="user_menu" name="Reporte Pre Nominal Usuario" parent="prepayroll_menu" sequence="21" groups="dominican_prepayroll.user_prepayroll_group"/>
+    <menuitem id="manager_menu" name="Reporte Pre Nominal Manager" parent="prepayroll_menu" groups="dominican_prepayroll.manager_prepayroll_group" sequence="22"/>
+
+    <!--     This Menu Item must have a parent and an action -->
+    <menuitem id="user_prepayroll_wizard_menu" name="Reporte Pre Nominal Usuario" parent="user_menu"
+              action="user_prepayroll_wizard_action" sequence="25"
+    />
+
+    <menuitem id="manager_prepayroll_wizard_menu" name="Reporte Pre Nominal Manager" parent="manager_menu"
+              action="manager_prepayroll_wizard_action"  sequence="30"
+    />
+</odoo>
