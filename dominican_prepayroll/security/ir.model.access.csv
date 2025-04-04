@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_dominican_pre_payroll,access_dominican_pre_payroll,model_pre_payroll,base.group_user,1,0,0,0
-access_user_pre_payslip,access_user_pre_payslip,model_hr_payslip,base.group_user,1,0,0,0
