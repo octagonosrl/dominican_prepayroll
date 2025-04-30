@@ -14,7 +14,7 @@
     'installable': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr', 'hr_payroll'],
+    'depends': ['base', 'hr', 'payroll'],
     'images': ['static/description/icon.png'],
 
     # always loaded
