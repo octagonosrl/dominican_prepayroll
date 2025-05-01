@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="om_hr_payroll.action_view_hr_payslip_form" model="ir.actions.act_window">
+        <record id="action_view_hr_payslip_form" model="ir.actions.act_window">
             <field name="name">Employee Payslips</field>
             <field name="res_model">hr.payslip</field>
-<!--            <field name="view_type">form</field>-->
+            <field name="binding_view_types">form</field>
             <field name="view_mode">tree,kanban,form</field>
-            <field name="search_view_id" ref="om_hr_payroll.view_hr_payslip_filter"/>
+            <field name="search_view_id" ref="payroll.hr_payslip_view_search"/>
             <field name="domain">[('is_prepayroll', '=', False)] </field>
         </record>
     </data>
 </odoo>
+

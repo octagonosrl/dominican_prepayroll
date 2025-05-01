@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="report_payslip_sudo_dominican_prepayroll" inherit_id="om_hr_payroll.report_payslip">
+        <template id="report_payslip_sudo_dominican_prepayroll" inherit_id="payroll.report_payslip">
             <xpath expr="//t[@t-as='o']" position="attributes">
                 <attribute name="t-foreach">docs.sudo()</attribute>
             </xpath>

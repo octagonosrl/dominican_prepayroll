@@ -29,8 +29,10 @@
                 </header>
                 <group>
                     <field name="report_type"/>
-                    <field name="employee_ids" widget="many2many_tags" attrs="{'invisible': [('all_departments', '=', True)]}"/>
-                    <field name="department_id" widget="many2many_tags" attrs="{'invisible': [('all_departments', '=', True)]}"/>
+                    <field name="employee_ids" widget="many2many_tags"
+                           attrs="{'invisible': [('all_departments', '=', True)]}"/>
+                    <field name="department_id" widget="many2many_tags"
+                           attrs="{'invisible': [('all_departments', '=', True)]}"/>
                     <field name="all_departments" attrs="{'invisible': [('department_id', '=', False)]}"/>
                 </group>
                 <separator colspan="2" string="Archivo XLS"/>
@@ -58,7 +60,7 @@
         <field name="name">Reporte Prenominal Para el Empleado</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">pre.payroll</field>
-<!--        <field name="view_type">form</field>-->
+        <field name="binding_view_types">form</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -72,7 +74,7 @@
         <field name="name">Reporte de Masivo Pre-Nómina</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">pre.payroll.manager.wizard</field>
-<!--        <field name="view_type">form</field>-->
+        <field name="binding_view_types">form</field>
         <field name="target">new</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="manager_wizard_view_form"/>
@@ -82,7 +84,7 @@
         <field name="name">Reporte de Pre-Nómina</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">pre.payroll.user.wizard</field>
-<!--        <field name="view_type">form</field>-->
+        <field name="binding_view_types">form</field>
         <field name="target">new</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="user_wizard_view_form"/>
@@ -96,8 +98,10 @@
     />
 
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="user_menu" name="Reporte Pre Nominal Usuario" parent="prepayroll_menu" sequence="21" groups="dominican_prepayroll.user_prepayroll_group"/>
-    <menuitem id="manager_menu" name="Reporte Pre Nominal Manager" parent="prepayroll_menu" groups="dominican_prepayroll.manager_prepayroll_group" sequence="22"/>
+    <menuitem id="user_menu" name="Reporte Pre Nominal Usuario" parent="prepayroll_menu" sequence="21"
+              groups="dominican_prepayroll.user_prepayroll_group"/>
+    <menuitem id="manager_menu" name="Reporte Pre Nominal Manager" parent="prepayroll_menu"
+              groups="dominican_prepayroll.manager_prepayroll_group" sequence="22"/>
 
     <!--     This Menu Item must have a parent and an action -->
     <menuitem id="user_prepayroll_wizard_menu" name="Reporte Pre Nominal Usuario" parent="user_menu"
@@ -105,6 +109,6 @@
     />
 
     <menuitem id="manager_prepayroll_wizard_menu" name="Reporte Pre Nominal Manager" parent="manager_menu"
-              action="manager_prepayroll_wizard_action"  sequence="30"
+              action="manager_prepayroll_wizard_action" sequence="30"
     />
 </odoo>

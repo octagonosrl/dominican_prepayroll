@@ -15,6 +15,7 @@ INCOME_TYPE = {
     '7': 'Exento por Ley de pago al SDSS',
 }
 
+
 class HrPayslip(models.Model):
     _inherit = 'hr.payslip'
 
@@ -36,7 +37,8 @@ class PrePayrollUWizard(models.TransientModel):
     employee_vat = fields.Char(string='Cédula')
     contract_id = fields.Many2one('hr.contract', string='Contrato del empleado')
     struct_id = fields.Many2one('hr.payroll.structure', string='Estructura Salarial')
-    report_type = fields.Selection([('pdf', 'PDF'), ('xlsx', 'Excel')], string='Tipo de reporte', required=True, default='pdf')
+    report_type = fields.Selection([('pdf', 'PDF'), ('xlsx', 'Excel')], string='Tipo de reporte', required=True,
+                                   default='pdf')
 
     payslip_report_xlsx_file_name = fields.Char()
     payslip_report_xlsx_binary = fields.Binary(string="Reporte de nómina XLS")
@@ -75,7 +77,8 @@ class PrePayrollUWizard(models.TransientModel):
             rec.sudo().compute_sheet()
 
         if self.sudo().report_type == 'pdf':
-            report_pdf = self.env.ref('om_hr_payroll.action_report_payslip').sudo().report_action(hr_payslip.ids, config=False)
+            report_pdf = self.env.ref('payroll.action_report_payslip').sudo().report_action(hr_payslip.ids,
+                                                                                            config=False)
             return report_pdf
 
             return {
@@ -98,7 +101,8 @@ class PrePayrollMWizard(models.TransientModel):
     struct_id = fields.Many2one('hr.payroll.structure', string='Estructura Salarial')
     department_id = fields.Many2many(comodel_name='hr.department', string='Departamento')
     all_departments = fields.Boolean(string='Todos los Departamentos')
-    report_type = fields.Selection([('pdf', 'PDF'), ('xlsx', 'Excel')], string='Tipo de reporte', required=True, default='pdf')
+    report_type = fields.Selection([('pdf', 'PDF'), ('xlsx', 'Excel')], string='Tipo de reporte', required=True,
+                                   default='pdf')
 
     payslip_report_xlsx_file_name = fields.Char()
     payslip_report_xlsx_binary = fields.Binary(string="Reporte de nómina XLS")
@@ -146,7 +150,8 @@ class PrePayrollMWizard(models.TransientModel):
             rec.sudo().compute_sheet()
 
         if self.sudo().report_type == 'pdf':
-            report_pdf = self.env.ref('om_hr_payroll.action_report_payslip').sudo().report_action(hr_payslip.ids, config=False)
+            report_pdf = self.env.ref('payroll.action_report_payslip').sudo().report_action(hr_payslip.ids,
+                                                                                            config=False)
             return report_pdf
 
         elif self.report_type == 'xlsx':

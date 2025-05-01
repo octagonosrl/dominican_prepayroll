@@ -5,7 +5,7 @@
         <record id="dominican_payroll_form_prepayroll_inherit" model="ir.ui.view">
             <field name="name">dominican_payroll_form_prepayroll_inherit</field>
             <field name="model">hr.payslip</field>
-            <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+            <field name="inherit_id" ref="payroll.hr_payslip_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='credit_note']" position="after">
                     <field name="is_prepayroll" readonly="1"/>
